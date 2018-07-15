@@ -16,9 +16,9 @@ int ban(int men[8][8]){
     printf("|%d",p+1);
     for(q=0;q<=7;q++){
       if(men[p][q]==1){
-        printf("|○");
+        printf("|●");
       }else if(men[p][q]==100){
-	printf("|●");
+	printf("|○");
       }else{
 	printf("| ");
       }
@@ -159,14 +159,14 @@ int canplace(int men[8][8],int inx,int iny){
   return q;
 }
 
-int uragaesi(int q){
+int uragaesi(int men[8][8],int inx,int iny,int q){
   int jibun=1,aite=100,mukix,mukiy;
 
   switch (q) {
     case 1:
       for(mukiy=iny+1;mukiy<=7;mukiy++){
         if(men[mukiy][inx]==aite){
-          men[mukiy][inx]==jibun;
+          men[mukiy][inx]=jibun;
         }else{
           break;
         }
@@ -176,9 +176,9 @@ int uragaesi(int q){
       for (mukiy=iny+1;mukiy>=0;mukiy--){
         for(mukix=inx+1;mukix<=7;mukix++){
           if (men[mukiy][mukix]==aite) {
-            men[mukiy][mukix]==jibun;
+            men[mukiy][mukix]=jibun;
           }else{
-            q=0;
+          break;
           }
         }
       }
@@ -186,13 +186,10 @@ int uragaesi(int q){
 
     case 3:
       for(mukix=inx+1;mukix<=7;mukix++){
-        if(men[iny][mukix]==jibun){
-          printf("case:%d\n",q);
-          q=3;
-          break;
-          printf("case:%d\n",q);
+        if(men[iny][mukix]==aite){
+          men[iny][mukix]=jibun;
         }else{
-          q=0;
+          break;
         }
     }
     break;
@@ -200,11 +197,10 @@ int uragaesi(int q){
     case 4:
       for (mukiy=iny+2;mukiy<=7;mukiy++){
         for(mukix=inx+2;mukix<=7;mukix++){
-          if (men[mukiy][mukix]==jibun) {
-            q=4;
-            break;
+          if (men[mukiy][mukix]==aite) {
+          men[mukiy][mukix]=jibun;
           }else{
-            q=0;
+            break;
           }
         }
       }
@@ -212,11 +208,10 @@ int uragaesi(int q){
 
     case 5:
       for(mukiy=iny+2;mukiy>=0;mukiy--){
-        if(men[mukiy][inx]==jibun){
-          q=5;
-          break;
+        if(men[mukiy][inx]==aite){
+          men[mukiy][inx]=jibun;
         }else{
-          q=1;
+          break;
         }
       }
       break;
@@ -224,11 +219,10 @@ int uragaesi(int q){
     case 6:
       for (mukiy=iny+2;mukiy<=7;mukiy++){
         for(mukix=inx+2;mukix>=0;mukix--){
-          if (men[mukiy][mukix]==jibun) {
-            q=6;
-            break;
+          if (men[mukiy][mukix]==aite) {
+            men[mukiy][mukix]=jibun;
           }else{
-            q=0;
+            break;
           }
         }
       }
@@ -236,11 +230,10 @@ int uragaesi(int q){
 
     case 7:
       for(mukix=inx+2;mukix>=0;mukix--){
-        if(men[iny][mukix]==jibun){
-          q=7;
-          break;
+        if(men[iny][mukix]==aite){
+          men[iny][mukix]=jibun;
         }else{
-          q=0;
+          break;
         }
       }
       break;
@@ -248,11 +241,10 @@ int uragaesi(int q){
     case 8:
       for (mukiy=iny+2;mukiy>=0;mukiy--){
         for(mukix=inx+2;mukix>=0;mukix--){
-          if (men[mukiy][mukix]==jibun) {
-            q=8;
-            break;
+          if (men[mukiy][mukix]==aite) {
+            men[mukiy][mukix]=jibun;
           }else{
-            q=0;
+            break;
           }
         }
       }
@@ -282,15 +274,12 @@ int main(void){
 
   ban(men);
 
-
  /*先攻後攻を決定*/
   if(randm()==1){
     printf("先攻です\n");
   }else{
     printf("後攻です\n");
-
   }
-
 
 
   //while(1){
@@ -309,6 +298,7 @@ while(1){
     printf("この場所には置けません\n");
   }else{
     men[iny][inx]=1;
+    uragaesi(men,inx,iny,cap);
     ban(men);
     break;
   }
