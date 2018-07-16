@@ -56,7 +56,6 @@ int canplace(int men[8][8],int inx,int iny,int player){
 
  //方向をチェック
    if(men[iny-1][inx-1]==aite){ //左上6
-     printf("case:%d-if6\n", q);
      for (mukiy=iny-1;mukiy>=0;mukiy--){
        for(mukix=inx-1;mukix>=0;mukix--){
          if (men[mukiy][mukix]==jibun) {
@@ -66,9 +65,7 @@ int canplace(int men[8][8],int inx,int iny,int player){
        }
      }
    }
-       printf("case:%d\n", q);
    if(men[iny+1][inx-1]==aite){ //左下8
-     printf("case:%d-if8\n", q);
      for (mukiy=iny+1;mukiy<=7;mukiy++){
        for(mukix=inx-1;mukix>=0;mukix--){
          if (men[mukiy][mukix]==jibun) {
@@ -80,9 +77,7 @@ int canplace(int men[8][8],int inx,int iny,int player){
        }
      }
    }
-       printf("case:%d\n", q);
    if(men[iny+1][inx+1]==aite){ //右下2
-     printf("case:%d-if2\n", q);
      for (mukiy=iny+1;mukiy<=7;mukiy++){
        for(mukix=inx+1;mukix<=7;mukix++){
          if (men[mukiy][mukix]==jibun) {
@@ -92,9 +87,7 @@ int canplace(int men[8][8],int inx,int iny,int player){
        }
      }
    }
-       printf("case:%d\n", q);
    if(men[iny-1][inx+1]==aite){ //右上4
-     printf("case:%d-if4\n", q);
      for (mukiy=iny-1;mukiy>=0;mukiy--){
        for(mukix=inx+1;mukix<=7;mukix++){
          if (men[mukiy][mukix]==jibun) {
@@ -104,9 +97,7 @@ int canplace(int men[8][8],int inx,int iny,int player){
        }
      }
    }
-       printf("case:%d\n", q);
    if(men[iny+1][inx]==aite){ //下1
-     printf("case:%d-if1\n", q);
      for(mukiy=iny+1;mukiy<=7;mukiy++){
        if(men[mukiy][inx]==jibun){
          q=1;
@@ -114,9 +105,7 @@ int canplace(int men[8][8],int inx,int iny,int player){
        }
      }
    }
-       printf("case:%d\n", q);
    if(men[iny-1][inx]==aite){ //上5
-     printf("case:%d-if5\n", q);
      for(mukiy=iny-1;mukiy>=0;mukiy--){
        if(men[mukiy][inx]==jibun){
          q=5;
@@ -124,9 +113,7 @@ int canplace(int men[8][8],int inx,int iny,int player){
        }
      }
    }
-       printf("case:%d\n", q);
    if(men[iny][inx+1]==aite){ //右3
-     printf("case:%d-if3\n", q);
      for(mukix=inx+1;mukix<=7;mukix++){
        if(men[iny][mukix]==jibun){
          q=3;
@@ -134,9 +121,7 @@ int canplace(int men[8][8],int inx,int iny,int player){
        }
      }
    }
-       printf("case:%d\n", q);
    if(men[iny][inx-1]==aite){ //左7
-     printf("case:%d-if7\n", q);
      for(mukix=inx-1;mukix>=0;mukix--){
        if(men[iny][mukix]==jibun){
          q=7;
@@ -146,14 +131,13 @@ int canplace(int men[8][8],int inx,int iny,int player){
        }
      }
    }
-      printf("case:%d\n", q);
 
     return q;
   }
 
 int uragaesi(int men[8][8],int inx,int iny,int q,int player){
-  int jibun=1,aite=100,mukix,mukiy;
-//  printf("case:%d\n",q);
+  int jibun,aite,mukix,mukiy,i;
+  printf("case:%d\n",q);
   if(player==1){
     aite=100;
     jibun=1;
@@ -172,17 +156,15 @@ int uragaesi(int men[8][8],int inx,int iny,int q,int player){
         }
       }
       break;
+
     case 2: //右下
-      for (mukiy=iny+1;mukiy<=7;mukiy++){
-        for(mukix=inx+1;mukix<=7;mukix++){
-          if (men[mukiy][mukix]==aite){
-            men[mukiy][mukix]=jibun;
-          }else{
-          break;
-          }
+      for(i=0;;i++){
+        if(men[iny+i][iny+i]==aite){
+          men[iny+i][iny+i]=jibun;
         }
-      }//
+      }
       break;
+
     case 3: //右
       for(mukix=inx+1;mukix<=7;mukix++){
         if(men[iny][mukix]==aite){
@@ -192,17 +174,17 @@ int uragaesi(int men[8][8],int inx,int iny,int q,int player){
         }
       }
       break;
+
     case 4: //右上
-      for (mukiy=iny-1;mukiy>=0;mukiy--){
-        for(mukix=inx+1;mukix<=7;mukix++){
-          if (men[mukiy][mukix]==aite) {
-          men[mukiy][mukix]=jibun;
-          }else{
-            break;
-          }
+      for(i=1;;i++){
+        if(men[iny-i][inx+i]==aite){
+          men[iny-i][inx+i]=jibun;
+        }else{
+          break;
         }
       }
       break;
+
     case 5: //上
       for(mukiy=iny-1;mukiy>=0;mukiy--){
         if(men[mukiy][inx]==aite){
@@ -212,17 +194,17 @@ int uragaesi(int men[8][8],int inx,int iny,int q,int player){
         }
       }
       break;
+
     case 6: //左上
-      for (mukiy=iny-1;mukiy>=0;mukiy--){
-        for(mukix=inx-1;mukix>=0;mukix--){
-          if (men[mukiy][mukix]==aite) {
-            men[mukiy][mukix]=jibun;
-          }else{
-            break;
-          }
+      for(i=1;;i++){
+        if(men[iny-i][inx-i]==aite){
+          men[iny-i][inx-i]=jibun;
+        }else{
+          break;
         }
       }
       break;
+
     case 7: //左
       for(mukix=inx-1;mukix>=0;mukix--){
         if(men[iny][mukix]==aite){
@@ -232,18 +214,19 @@ int uragaesi(int men[8][8],int inx,int iny,int q,int player){
         }
       }
       break;
+
     case 8: //左下
-      for (mukiy=iny+1;mukiy<=7;mukiy++){
-        for(mukix=inx-1;mukix>=0;mukix--){
-          if (men[mukiy][mukix]==aite) {
-            men[mukiy][mukix]=jibun;
-          }else{
-            break;
-          }
+      for(i=1;;i++){
+        if(men[iny+i][inx-i]==aite){
+          men[iny+i][inx-i]=jibun;
+        }else{
+          break;
         }
       }
       break;
+
     case 0:;
+
       break;
   }
 }
@@ -355,8 +338,8 @@ int compuragaesi(int men[8][8],int inx,int iny,int q,int omomi[8][8]){
 int main(void){
 
   int men[8][8];
-  int comen[8][8];
-  int omomi[8][8];
+  int comen[8][8]; //コンピュータ用
+  int omomi[8][8]; //コンピュータ用
   int p,q,inx,iny,cap,end;
 
   /*盤面を初期化*/
@@ -374,7 +357,7 @@ int main(void){
 
   ban(men);
 
- /*先攻後攻を決定*/
+ /*先攻後攻を決定　交互にやるなら要らない気もする*/
   if(randm()==1){
     printf("先攻です\n");
   }else{
@@ -399,10 +382,10 @@ int main(void){
         printf("この場所には置けません\n");
       }else{
         men[iny][inx]=1;
-      //  while (cap!=0) {
+        while (cap!=0) {
           uragaesi(men,inx,iny,cap,1);
           cap=canplace(men,inx,iny,1);
-      //  }
+        }
         ban(men);
         break;
       }
@@ -425,10 +408,10 @@ int main(void){
         printf("この場所には置けません\n");
       }else{
         men[iny][inx]=100;
-      //  while (cap!=0) {
+        while (cap!=0) {
           uragaesi(men,inx,iny,cap,0);
           cap=canplace(men,inx,iny,0);
-      //  }
+        }
         ban(men);
         break;
       }
