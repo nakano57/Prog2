@@ -43,7 +43,7 @@ int deban(int omomi[8][8]){
 }
 
 int canplace(int men[8][8],int inx,int iny,int player){
-  int q=0,aite,jibun,mukiy,mukix;
+  int q,aite,jibun,mukiy,mukix;
 
   if(player==1){
     aite=100;
@@ -59,10 +59,9 @@ int canplace(int men[8][8],int inx,int iny,int player){
   }
 
 //方向をチェック
-  if(men[iny-1][inx-1]==aite){
-    q=6; //左上
-    for (mukiy=iny+2;mukiy<=7;mukiy++){
-      for(mukix=inx+2;mukix>=0;mukix--){
+  if(men[iny-1][inx-1]==aite){ //左上
+    for (mukiy=iny-2;mukiy<=7;mukiy--){
+      for(mukix=inx-2;mukix>=0;mukix--){
         if (men[mukiy][mukix]!=jibun) {
           q=6;
           break;
@@ -71,11 +70,9 @@ int canplace(int men[8][8],int inx,int iny,int player){
         }
       }
     }
-  }
-  if(men[iny+1][inx-1]==aite){
-    q=8; //左下
-    for (mukiy=iny+2;mukiy>=0;mukiy--){
-      for(mukix=inx+2;mukix>=0;mukix--){
+  }else if(men[iny+1][inx-1]==aite){ //左下
+    for (mukiy=iny+2;mukiy>=0;mukiy++){
+      for(mukix=inx-2;mukix>=0;mukix--){
         if (men[mukiy][mukix]==jibun) {
           q=8;
           break;
@@ -84,10 +81,8 @@ int canplace(int men[8][8],int inx,int iny,int player){
         }
       }
     }
-  }
-  if(men[iny+1][inx+1]==aite){
-    q=2; //右下
-    for (mukiy=iny+2;mukiy>=0;mukiy--){
+  }else if(men[iny+1][inx+1]==aite){ //右下
+    for (mukiy=iny-2;mukiy>=0;mukiy--){
       for(mukix=inx+2;mukix<=7;mukix++){
         if (men[mukiy][mukix]==jibun) {
           q=2;
@@ -97,9 +92,7 @@ int canplace(int men[8][8],int inx,int iny,int player){
         }
       }
     }
-  }
-  if(men[iny-1][inx+1]==aite){
-    q=4; //右上
+  }else if(men[iny-1][inx+1]==aite){ //右上
     for (mukiy=iny+2;mukiy<=7;mukiy++){
       for(mukix=inx+2;mukix<=7;mukix++){
         if (men[mukiy][mukix]==jibun) {
@@ -110,9 +103,7 @@ int canplace(int men[8][8],int inx,int iny,int player){
         }
       }
     }
-  }
-  if(men[iny+1][inx]==aite){
-    q=1; //下
+  }else if(men[iny+1][inx]==aite){ //下
     for(mukiy=iny+2;mukiy<=7;mukiy++){
       if(men[mukiy][inx]==jibun){
         q=1;
@@ -121,10 +112,8 @@ int canplace(int men[8][8],int inx,int iny,int player){
         q=0;
       }
     }
-  }
-  if(men[iny-1][inx]==aite){
-    q=5; //上
-    for(mukiy=iny+2;mukiy>=0;mukiy--){
+  }else if(men[iny-1][inx]==aite){//上
+    for(mukiy=iny-2;mukiy>=0;mukiy--){
       if(men[mukiy][inx]==jibun){
         q=5;
         break;
@@ -132,9 +121,7 @@ int canplace(int men[8][8],int inx,int iny,int player){
         q=1;
       }
     }
-  }
-  if(men[iny][inx+1]==aite){
-    q=3; //右
+  }else if(men[iny][inx+1]==aite){//右
     for(mukix=inx+2;mukix<=7;mukix++){
       if(men[iny][mukix]==jibun){
         q=3;
@@ -143,10 +130,8 @@ int canplace(int men[8][8],int inx,int iny,int player){
         q=0;
       }
     }
-  }
-  if(men[iny][inx-1]==aite){
-    q=7; //左
-    for(mukix=inx+2;mukix>=0;mukix--){
+  }else if(men[iny][inx-1]==aite){//左
+    for(mukix=inx-2;mukix>=0;mukix--){
       if(men[iny][mukix]==jibun){
         q=7;
         break;
@@ -517,7 +502,10 @@ int main(void){
         printf("この場所には置けません\n");
       }else{
         men[iny][inx]=1;
-        uragaesi(men,inx,iny,cap,1);
+        while (cap!=0) {
+          uragaesi(men,inx,iny,cap,1);
+          cap=canplace(men,inx,iny,1);
+        }
         ban(men);
         break;
       }
@@ -540,7 +528,10 @@ int main(void){
         printf("この場所には置けません\n");
       }else{
         men[iny][inx]=100;
-        uragaesi(men,inx,iny,cap,0);
+        while (cap!=0) {
+          uragaesi(men,inx,iny,cap,0);
+          cap=canplace(men,inx,iny,0);
+        }
         ban(men);
         break;
       }
