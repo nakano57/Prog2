@@ -37,7 +37,7 @@ int cv2bin( unsigned char n ,int DIGITS) {
 
 
 int main(int argc, char const *argv[]) {
-  int num=atoi(argv[1]),p,q,i,j,bin,r=1,res,mul;
+  int num=atoi(argv[1]),p,q,i,j,bin,r=1;
   int w[num][num];
 
 //準備
@@ -54,6 +54,7 @@ int main(int argc, char const *argv[]) {
   }
 
   int x[num][r];
+  int res[num][num][r];
 
   for(q=0;q<=r-1;q++){
     for( i = num-1; i >= 0; i-- ) {
@@ -69,9 +70,8 @@ int main(int argc, char const *argv[]) {
 for(q=0;q<=r-1;q++){
   for(i=0;num-1;i++){
     for(j=0;num-1;j++){
-      mul=w[i][j]*x[i][q]*x[j][q];
-      res=res+mul;
-    //  printf(" %d,%d ", res,mul);
+      res[i][j][q]=w[i][j]*x[i][q]*x[j][q];
+      printf(" %d", res[i][j][q]);
     }
   }
   printf("\n");
