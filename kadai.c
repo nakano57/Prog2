@@ -382,9 +382,12 @@ int main(void){
         printf("この場所には置けません\n");
       }else{
         men[iny][inx]=1;
-        while (cap!=0) {
+        while (1) {
           uragaesi(men,inx,iny,cap,1);
           cap=canplace(men,inx,iny,1);
+          if(cap==0){
+            break;
+          }
         }
         ban(men);
         break;
@@ -408,9 +411,12 @@ int main(void){
         printf("この場所には置けません\n");
       }else{
         men[iny][inx]=100;
-        while (cap!=0) {
+        while (1) {
           uragaesi(men,inx,iny,cap,0);
           cap=canplace(men,inx,iny,0);
+          if(cap==0){
+            break;
+          }
         }
         ban(men);
         break;
