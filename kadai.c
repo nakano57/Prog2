@@ -55,128 +55,98 @@ int canplace(int men[8][8],int inx,int iny,int player){
 
 
  //方向をチェック
-   if(men[iny-1][inx-1]==aite){
-     q=6; //左上
-   }
-   if(men[iny+1][inx-1]==aite){
-     q=8; //左下
-   }
-   if(men[iny+1][inx+1]==aite){
-     q=2; //右下
-   }
-   if(men[iny-1][inx+1]==aite){
-     q=4; //右上
-   }
-   if(men[iny+1][inx]==aite){
-     q=1; //下
-   }
-   if(men[iny-1][inx]==aite){
-     q=5; //上
-   }
-   if(men[iny][inx+1]==aite){
-     q=3; //右
-   }
-   if(men[iny][inx-1]==aite){
-     q=7; //左
-   }
-    printf("case:%d\n", q);
-
-   //その先をチェック
-   switch (q) {
-     case 1: //下
-       for(mukiy=iny+1;mukiy<=7;mukiy++){
-         if(men[mukiy][inx]==jibun){
-           q=1;
-           break;
-         }else{
-           q=0;
-         }
-       }
-       break;
-     case 2: //右下
-       for (mukiy=iny+1;mukiy<=7;mukiy++){
-         for(mukix=inx+1;mukix<=7;mukix++){
-           if (men[mukiy][mukix]==jibun) {
-             q=2;
-             break;
-           }else{
-             q=0;
-           }
-         }
-       }
-       break;
-     case 3: //右
-       for(mukix=inx+1;mukix<=7;mukix++){
-         if(men[iny][mukix]==jibun){
-           q=3;
-           break;
-         }else{
-           q=0;
-         }
-       }
-       break;
-     case 4: //右上
-       for (mukiy=iny-1;mukiy>=0;mukiy--){
-         for(mukix=inx+1;mukix<=7;mukix++){
-           if (men[mukiy][mukix]==jibun) {
-             q=4;
-             break;
-           }else{
-             q=0;
-           }
-         }
-       }
-       break;
-     case 5: //上
-       for(mukiy=iny-1;mukiy>=0;mukiy--){
-         if(men[mukiy][inx]==jibun){
-           q=5;
-           break;
-         }else{
-           q=1;
-         }
-       }
-       break;
-     case 6: //左上
-       for (mukiy=iny-1;mukiy>=0;mukiy--){
-         for(mukix=inx-1;mukix>=0;mukix--){
-           if (men[mukiy][mukix]==jibun) {
-             q=6;
-             break;
-           }else{
-             q=0;
-           }
-         }
-       }
-       break;
-     case 7: //左
+   if(men[iny-1][inx-1]==aite){ //左上6
+     printf("case:%d-if6\n", q);
+     for (mukiy=iny-1;mukiy>=0;mukiy--){
        for(mukix=inx-1;mukix>=0;mukix--){
-         if(men[iny][mukix]==jibun){
-           q=7;
+         if (men[mukiy][mukix]==jibun) {
+           q=6;
            break;
-         }else{
-           q=0;
          }
        }
-       break;
-     case 8: //左下
-       for (mukiy=iny+1;mukiy<=7;mukiy++){
-         for(mukix=inx-1;mukix>=0;mukix--){
-           if (men[mukiy][mukix]==jibun) {
-             q=8;
-             break;
-           }else{
-             q=0;
-           }
-         }
-       }
-       break;
-
-     case 0:;
-       break;
+     }
    }
-
-    printf("case:%d\n", q);
+       printf("case:%d\n", q);
+   if(men[iny+1][inx-1]==aite){ //左下8
+     printf("case:%d-if8\n", q);
+     for (mukiy=iny+1;mukiy<=7;mukiy++){
+       for(mukix=inx-1;mukix>=0;mukix--){
+         if (men[mukiy][mukix]==jibun) {
+           q=8;
+           break;
+         }/*else{
+           q=0;
+         } */
+       }
+     }
+   }
+       printf("case:%d\n", q);
+   if(men[iny+1][inx+1]==aite){ //右下2
+     printf("case:%d-if2\n", q);
+     for (mukiy=iny+1;mukiy<=7;mukiy++){
+       for(mukix=inx+1;mukix<=7;mukix++){
+         if (men[mukiy][mukix]==jibun) {
+           q=2;
+           break;
+         }
+       }
+     }
+   }
+       printf("case:%d\n", q);
+   if(men[iny-1][inx+1]==aite){ //右上4
+     printf("case:%d-if4\n", q);
+     for (mukiy=iny-1;mukiy>=0;mukiy--){
+       for(mukix=inx+1;mukix<=7;mukix++){
+         if (men[mukiy][mukix]==jibun) {
+           q=4;
+           break;
+         }
+       }
+     }
+   }
+       printf("case:%d\n", q);
+   if(men[iny+1][inx]==aite){ //下1
+     printf("case:%d-if1\n", q);
+     for(mukiy=iny+1;mukiy<=7;mukiy++){
+       if(men[mukiy][inx]==jibun){
+         q=1;
+         break;
+       }
+     }
+   }
+       printf("case:%d\n", q);
+   if(men[iny-1][inx]==aite){ //上5
+     printf("case:%d-if5\n", q);
+     for(mukiy=iny-1;mukiy>=0;mukiy--){
+       if(men[mukiy][inx]==jibun){
+         q=5;
+         break;
+       }
+     }
+   }
+       printf("case:%d\n", q);
+   if(men[iny][inx+1]==aite){ //右3
+     printf("case:%d-if3\n", q);
+     for(mukix=inx+1;mukix<=7;mukix++){
+       if(men[iny][mukix]==jibun){
+         q=3;
+         break;
+       }
+     }
+   }
+       printf("case:%d\n", q);
+   if(men[iny][inx-1]==aite){ //左7
+     printf("case:%d-if7\n", q);
+     for(mukix=inx-1;mukix>=0;mukix--){
+       if(men[iny][mukix]==jibun){
+         q=7;
+         break;
+       }else{
+         q=0;
+       }
+     }
+   }
+      printf("case:%d\n", q);
 
     return q;
   }
@@ -193,7 +163,7 @@ int uragaesi(int men[8][8],int inx,int iny,int q,int player){
   }
 
   switch (q) {
-    case 1:
+    case 1: //下
       for(mukiy=iny+1;mukiy<=7;mukiy++){
         if(men[mukiy][inx]==aite){
           men[mukiy][inx]=jibun;
@@ -202,30 +172,28 @@ int uragaesi(int men[8][8],int inx,int iny,int q,int player){
         }
       }
       break;
-    case 2:
-      for (mukiy=iny-1;mukiy>=0;mukiy--){
+    case 2: //右下
+      for (mukiy=iny+1;mukiy<=7;mukiy++){
         for(mukix=inx+1;mukix<=7;mukix++){
-          if (men[mukiy][mukix]==aite) {
+          if (men[mukiy][mukix]==aite){
             men[mukiy][mukix]=jibun;
           }else{
           break;
           }
         }
-      }
+      }//
       break;
-
-    case 3:
+    case 3: //右
       for(mukix=inx+1;mukix<=7;mukix++){
         if(men[iny][mukix]==aite){
           men[iny][mukix]=jibun;
         }else{
           break;
         }
-    }
-    break;
-
-    case 4:
-      for (mukiy=iny+1;mukiy<=7;mukiy++){
+      }
+      break;
+    case 4: //右上
+      for (mukiy=iny-1;mukiy>=0;mukiy--){
         for(mukix=inx+1;mukix<=7;mukix++){
           if (men[mukiy][mukix]==aite) {
           men[mukiy][mukix]=jibun;
@@ -235,8 +203,7 @@ int uragaesi(int men[8][8],int inx,int iny,int q,int player){
         }
       }
       break;
-
-    case 5:
+    case 5: //上
       for(mukiy=iny-1;mukiy>=0;mukiy--){
         if(men[mukiy][inx]==aite){
           men[mukiy][inx]=jibun;
@@ -245,30 +212,7 @@ int uragaesi(int men[8][8],int inx,int iny,int q,int player){
         }
       }
       break;
-
-    case 6:
-      for (mukiy=iny+1;mukiy<=7;mukiy++){
-        for(mukix=inx-1;mukix>=0;mukix--){
-          if (men[mukiy][mukix]==aite) {
-            men[mukiy][mukix]=jibun;
-          }else{
-            break;
-          }
-        }
-      }
-      break;
-
-    case 7:
-      for(mukix=inx-1;mukix>=0;mukix--){
-        if(men[iny][mukix]==aite){
-          men[iny][mukix]=jibun;
-        }else{
-          break;
-        }
-      }
-      break;
-
-    case 8:
+    case 6: //左上
       for (mukiy=iny-1;mukiy>=0;mukiy--){
         for(mukix=inx-1;mukix>=0;mukix--){
           if (men[mukiy][mukix]==aite) {
@@ -279,7 +223,26 @@ int uragaesi(int men[8][8],int inx,int iny,int q,int player){
         }
       }
       break;
-
+    case 7: //左
+      for(mukix=inx-1;mukix>=0;mukix--){
+        if(men[iny][mukix]==aite){
+          men[iny][mukix]=jibun;
+        }else{
+          break;
+        }
+      }
+      break;
+    case 8: //左下
+      for (mukiy=iny+1;mukiy<=7;mukiy++){
+        for(mukix=inx-1;mukix>=0;mukix--){
+          if (men[mukiy][mukix]==aite) {
+            men[mukiy][mukix]=jibun;
+          }else{
+            break;
+          }
+        }
+      }
+      break;
     case 0:;
       break;
   }
@@ -436,10 +399,10 @@ int main(void){
         printf("この場所には置けません\n");
       }else{
         men[iny][inx]=1;
-        while (cap!=0) {
+      //  while (cap!=0) {
           uragaesi(men,inx,iny,cap,1);
           cap=canplace(men,inx,iny,1);
-        }
+      //  }
         ban(men);
         break;
       }
@@ -462,10 +425,10 @@ int main(void){
         printf("この場所には置けません\n");
       }else{
         men[iny][inx]=100;
-        while (cap!=0) {
+      //  while (cap!=0) {
           uragaesi(men,inx,iny,cap,0);
           cap=canplace(men,inx,iny,0);
-        }
+      //  }
         ban(men);
         break;
       }
