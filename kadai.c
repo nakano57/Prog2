@@ -19,7 +19,7 @@ int ban(int men[8][8]){
         printf("|●");
       }else if(men[p][q]==100){
 	      printf("|○");
-      }else if(men[p][q]==-1){
+      }else if(men[p][q]==-10){
         printf("|x");
       }else{
 	printf("| ");
@@ -277,7 +277,7 @@ int dokoniokerukana(int men[8][8],int okumen[8][8],int player){
     for(q=0;q<=7;q++){
       okumen[p][q]=men[p][q];
       if (canplace(men,q,p,player)!=0) {
-        okumen[p][q]=-1;
+        okumen[p][q]=-10;
       }
     }
   }
