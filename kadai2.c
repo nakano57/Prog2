@@ -26,25 +26,26 @@ return w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));
 
 
 int main(int argc, char const *argv[]) {
-  int num=atoi(argv[1]),p,q,i,j,r=1,tmp,zan;
-  int w[num][num];
+  long int num=atoi(argv[1]),p,q,i,j,tmp,zan;
+  long long int r=1;
+  long int w[num][num];
 
 //準備
   for(p=0;p<=num-1;p++){
     for(q=0;q<=num-1;q++){
       w[p][q]=xor128()%num+1;
-  //    printf("%d", w[p][q]);
+    //  printf("%d", w[p][q]);
     }
   //  printf("\n");
   }
-  //printf("\n");
+//  printf("\n");
 
   for(i=0;i<=num-1;i++){
     r=r*2;
   }
 
-  int x[num][r];
-  int result[r];
+  long long int x[num][r];
+  long long int result[r];
 
 
   for(q=0;q<=r-1;q++){
@@ -54,14 +55,15 @@ int main(int argc, char const *argv[]) {
   for(q=0;q<=r-1;q++){
     for( i = num-1; i >= 0; i-- ) {
         x[i][q]=(( q >> i ) & 1);
+
         if(x[i][q]==0){
           x[i][q]=-1;
         }
-        //printf("%d",x[i][q] );
+        printf("%lld",x[i][q] );
     }
-  //  printf("\n");
+    printf("\n");
   }
-//  printf("\n");
+  printf("\n");
 
   for(q=0;q<=r-1;q++){
     for(i=0;i<=num-1;i++){
@@ -82,9 +84,9 @@ int main(int argc, char const *argv[]) {
     }
   }
 
-  printf("f(x)=%d\nx=(",result[zan]);
+  printf("f(x)=%lld\nx=(",result[zan]);
   for(i=0;i<=num-1;i++){
-    printf("%d,",x[i][zan]);
+    printf("%lld,",x[i][zan]);
   }
   printf(")\n");
 
