@@ -18,7 +18,9 @@ int ban(int men[8][8]){
       if(men[p][q]==1){
         printf("|●");
       }else if(men[p][q]==100){
-	printf("|○");
+	      printf("|○");
+      }else if(men[p][q]==-1){
+        printf("|x");
       }else{
 	printf("| ");
       }
@@ -43,7 +45,7 @@ int deban(int omomi[8][8]){
 }
 
 int canplace(int men[8][8],int inx,int iny,int player){
-   int q=0,aite,jibun,mukiy,mukix;
+   int q=0,aite,jibun,mukiy,mukix,i;
 
    if(player==1){
      aite=100;
@@ -53,9 +55,22 @@ int canplace(int men[8][8],int inx,int iny,int player){
      jibun=100;
    }
 
+   if(men[inx][iny]!=0){
+     return q;
+   }
+
 
  //方向をチェック
    if(men[iny-1][inx-1]==aite){ //左上6
+     for(i=1;;i++){
+       if(men[iny-i][inx-i]==jibun){
+         q=6;
+         break;
+       }else if(iny-i<0 || inx-i<0){
+         break;
+       }
+     }
+     /*
      for (mukiy=iny-1;mukiy>=0;mukiy--){
        for(mukix=inx-1;mukix>=0;mukix--){
          if (men[mukiy][mukix]==jibun) {
@@ -63,21 +78,37 @@ int canplace(int men[8][8],int inx,int iny,int player){
            break;
          }
        }
-     }
+     } */
    }
    if(men[iny+1][inx-1]==aite){ //左下8
+     for(i=1;;i++){
+       if(men[iny+i][inx-i]==jibun){
+         q=8;
+         break;
+       }else if(iny+i>7 || inx-i<0){
+         break;
+       }
+     }
+     /*
      for (mukiy=iny+1;mukiy<=7;mukiy++){
        for(mukix=inx-1;mukix>=0;mukix--){
          if (men[mukiy][mukix]==jibun) {
            q=8;
            break;
-         }/*else{
-           q=0;
-         } */
+         }
        }
-     }
+     } */
    }
    if(men[iny+1][inx+1]==aite){ //右下2
+     for(i=1;;i++){
+       if(men[iny+i][inx+i]==jibun){
+         q=2;
+         break;
+       }else if(iny+i>7 || inx+i>7){
+         break;
+       }
+     }
+     /*
      for (mukiy=iny+1;mukiy<=7;mukiy++){
        for(mukix=inx+1;mukix<=7;mukix++){
          if (men[mukiy][mukix]==jibun) {
@@ -85,9 +116,18 @@ int canplace(int men[8][8],int inx,int iny,int player){
            break;
          }
        }
-     }
+     } */
    }
    if(men[iny-1][inx+1]==aite){ //右上4
+     for(i=1;;i++){
+       if(men[iny-i][inx+i]==jibun){
+         q=4;
+         break;
+       }else if(iny-i<0 || inx+i>7){
+         break;
+       }
+     }
+     /*
      for (mukiy=iny-1;mukiy>=0;mukiy--){
        for(mukix=inx+1;mukix<=7;mukix++){
          if (men[mukiy][mukix]==jibun) {
@@ -95,7 +135,7 @@ int canplace(int men[8][8],int inx,int iny,int player){
            break;
          }
        }
-     }
+     } */
    }
    if(men[iny+1][inx]==aite){ //下1
      for(mukiy=iny+1;mukiy<=7;mukiy++){
@@ -231,13 +271,25 @@ int uragaesi(int men[8][8],int inx,int iny,int q,int player){
   }
 }
 
+int dokoniokerukana(int men[8][8],int okumen[8][8],int player){
+  int p,q;
+  for(p=0;p<=7;p++){
+    for(q=0;q<=7;q++){
+      okumen[p][q]=men[p][q];
+      if (canplace(men,q,p,player)!=0) {
+        okumen[p][q]=-1;
+      }
+    }
+  }
+}
+
 /*struct complace{
   int okuy;
   int okux;
   int uray;
   int urax;
 }; */
-
+/*
 int compuragaesi(int men[8][8],int inx,int iny,int q,int omomi[8][8]){
   int jibun=100,aite=1,mukix,mukiy;
     // struct complace cp;
@@ -334,10 +386,12 @@ int compuragaesi(int men[8][8],int inx,int iny,int q,int omomi[8][8]){
       break;
   }
 }
+*/
 
 int main(void){
 
   int men[8][8];
+  int okumen[8][8];
   int comen[8][8]; //コンピュータ用
   int omomi[8][8]; //コンピュータ用
   int p,q,inx,iny,cap,end;
@@ -355,8 +409,6 @@ int main(void){
   men[3][4]=100;
   men[4][3]=100;
 
-  ban(men);
-
  /*先攻後攻を決定　交互にやるなら要らない気もする*/
   if(randm()==1){
     printf("先攻です\n");
@@ -367,6 +419,10 @@ int main(void){
 
   while(1){
         /*プレイヤー1の操作*/
+    dokoniokerukana(men,okumen,1);
+    ban(okumen);
+    ban(men);
+
     while(1){
       printf("プレイヤー1:●\n変更箇所を入力してください\n横:");
       scanf("%d",&inx);
@@ -389,13 +445,16 @@ int main(void){
             break;
           }
         }
-        ban(men);
         break;
       }
     }
     /*プレイヤー1ここまで*/
 
     /*プレイヤー2*/
+    dokoniokerukana(men,okumen,0);
+    ban(okumen);
+    ban(men);
+
     while(1){
       printf("プレイヤー2:○\n変更箇所を入力してください\n横:");
       scanf("%d",&inx);
