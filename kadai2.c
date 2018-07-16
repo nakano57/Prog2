@@ -24,7 +24,7 @@ x = y; y = z; z = w;
 return w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));
 }
 
-int cv2bin( unsigned char n ,int DIGITS) {
+/*int cv2bin( unsigned char n ,int DIGITS) {
     int i,r;
 
     for( i = DIGITS-1; i >= 0; i-- ) {
@@ -33,7 +33,7 @@ int cv2bin( unsigned char n ,int DIGITS) {
     }
     printf( "\n" );
     return r;
-}
+}*/
 
 
 int main(int argc, char const *argv[]) {
