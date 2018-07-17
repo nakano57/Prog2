@@ -2,22 +2,12 @@
 #include<stdlib.h>
 #include<time.h>
 
-/*int randm(int i){
-  struct timeval tv;
-  gettimeofday(&tv, NULL);
-  int o,p;
-  p=2*i;
-  srand((unsigned int)tv.tv_sec * ((unsigned int)tv.tv_usec + 1));
-  o=rand()%p+1;
-  return o-i;
-} */
-
-unsigned int xor128(void){
+unsigned long long int xor128(void){
 static unsigned int x = 123456789;
 static unsigned int y = 362436069;
 static unsigned int z = 521288629;
 static unsigned int w = 88675123;
-unsigned int t;
+long unsigned int t;
 
 t = x ^ (x << 11);
 x = y; y = z; z = w;
@@ -26,8 +16,8 @@ return w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));
 
 
 int main(int argc, char const *argv[]) {
-  long int num=atoi(argv[1]),p,q,i,j,tmp,zan;
-  long long int r=1;
+  long long int num=atoi(argv[1]),p,q,i,j,tmp,zan;
+  long long unsigned int r=1;
   long int w[num][num];
 
 //準備
