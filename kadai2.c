@@ -1,6 +1,5 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<time.h>
 
 unsigned long long int xor128(void){
 static unsigned long int x = 123456789;
