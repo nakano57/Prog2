@@ -21,8 +21,6 @@ int main(int argc, char const *argv[]) {
   long int w[num][num];
   int **x;
   int *result;
-//  long long int x[num][r];
-//  long long int result[r];
 
 //準備
   for(i=0;i<=num-1;i++){
@@ -32,29 +30,17 @@ int main(int argc, char const *argv[]) {
   for(p=0;p<=num-1;p++){
     for(q=0;q<=num-1;q++){
       w[p][q]=xor128()%num+1;
-    //  printf("%d", w[p][q]);
     }
-  //  printf("\n");
   }
-//  printf("\n");
 
-
-  printf("passed3\n");
-  //long long int result[r];
+  /*配列の確保*/
   result = (int *)calloc(r, sizeof(int));
-  printf("passed4\n");
-
   x = (int**)calloc(num, sizeof(int));
 	for (i=0; i<num; i++) {
 		x[i] = (int*)calloc(r, sizeof(int));
 	}
-//  long long int x[num][r];
 
-
-//  for(q=0;q<=r;q++){
-//    result[q]=0;
-//  }
-  printf("passed2\n");
+  /*ベクトル設定*/
   for(q=0;q<=r-1;q++){
     for( i = num-1; i >= 0; i-- ) {
         x[i][q]=(( q >> i ) & 1);
@@ -68,15 +54,15 @@ int main(int argc, char const *argv[]) {
   }
   printf("\n");
 
+  /*式の計算*/
   for(q=0;q<=r-1;q++){
     for(i=0;i<=num-1;i++){
       for(j=0;j<=num-1;j++){
         result[q]=result[q]+w[i][j]*x[i][q]*x[j][q];
       }
     }
-  //  printf("%d\n",result[q] );
   }
-
+  /*ソート*/
   for(q=0;q<=r-1;q++){
     if(q==0){
         zan=0;
